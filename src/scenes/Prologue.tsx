@@ -102,10 +102,10 @@ export const Prologue: React.FC = () => {
 const PortraitStrips: React.FC<{l: number}> = ({l}) => {
   const o = kf(l, [[0, 0], [12, 1], [78, 1], [90, 0]]);
   const strips = [
-    {y: 0.1, h: 300, dir: 1, zoom: 3.6, fx: 0.385, fy: 0.2, id: 'consul' as const},
-    {y: 0.3, h: 250, dir: -1, zoom: 3.0, fx: 0.36, fy: 0.27, id: 'harangue' as const},
-    {y: 0.48, h: 360, dir: 1, zoom: 2.4, fx: 0.4, fy: 0.13, id: 'consul' as const},
-    {y: 0.7, h: 220, dir: -1, zoom: 3.4, fx: 0.4, fy: 0.42, id: 'consul' as const},
+    {y: 0.1, h: 300, dir: 1, zoom: 3.6, fx: 0.47, fy: 0.23, id: 'consul' as const},
+    {y: 0.3, h: 250, dir: -1, zoom: 3.0, fx: 0.345, fy: 0.25, id: 'harangue' as const},
+    {y: 0.48, h: 360, dir: 1, zoom: 2.4, fx: 0.45, fy: 0.2, id: 'consul' as const},
+    {y: 0.7, h: 220, dir: -1, zoom: 3.4, fx: 0.5, fy: 0.38, id: 'consul' as const},
   ];
   return (
     <Fill style={{opacity: o}}>

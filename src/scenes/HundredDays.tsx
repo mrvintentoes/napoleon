@@ -50,7 +50,7 @@ const Eyes: React.FC<{l: number}> = ({l}) => {
         <Fill style={{background: '#000'}}>
           {/* eyes strip */}
           <div style={{position: 'absolute', left: 0, top: 660, width: 1080, height: 420, overflow: 'hidden'}}>
-            <HistoricalImage id="consul" boxW={1080} boxH={420} zoom={9 * kf(l, [[0, 1.15], [40, 1]])} focus={{x: 0.39, y: 0.198}} place={{x: 0.5, y: 0.5}} filter="contrast(1.4) saturate(1.3)" clamp={false} />
+            <HistoricalImage id="consul" boxW={1080} boxH={420} zoom={5.2 * kf(l, [[0, 1.15], [40, 1]])} focus={{x: 0.462, y: 0.227}} place={{x: 0.5, y: 0.5}} filter="contrast(1.4) saturate(1.3)" clamp={false} />
           </div>
           <TypographyImpact text="ESCAPE" at={10} mode="slam" font="grotesk" size={300} y={1400} color="#fff" />
           <TypographyImpact text="THE HUNDRED DAYS" at={16} mode="track" font="imperial" size={54} y={1560} color="#e3b955" tracking={0.2} />
@@ -103,6 +103,7 @@ const RouteNorth: React.FC<{l: number}> = ({l}) => {
             at={64}
             out={150}
             mode="type"
+            speed={3}
             font="archive"
             size={30}
             y={1590}
@@ -140,8 +141,8 @@ const Returns: React.FC<{l: number}> = ({l}) => {
             <Figure id="consul_rider" x={540} y={1180} h={1250} filter="drop-shadow(0 0 50px rgba(0,0,0,0.8)) saturate(1.3)" />
           </Cam>
           <EagleEmblem state="flying" size={700} y={500} at={30} />
-          <NameMotif from={POWER.y1814} to={POWER.y1815} at={0} dur={14} text="NAPOLEON" y={1540} color="#fff" tracking={-0.02} />
-          <TypographyImpact text="RETURNS" at={20} mode="slam" font="grotesk" size={260} y={1760} color="#e3b955" chroma={6} />
+          <NameMotif from={POWER.y1814} to={POWER.y1815} at={0} dur={14} text="NAPOLEON" y={1470} color="#fff" tracking={-0.02} />
+          <TypographyImpact text="RETURNS" at={20} mode="slam" font="grotesk" size={220} y={1690} color="#e3b955" chroma={6} />
           <TypographyImpact text="PARIS · 20 MARCH 1815" at={4} mode="track" font="archive" size={40} y={200} color="#fff" tracking={0.3} weight={600} />
           <ParticleField kind="gold" density={120} speed={4} seed={211} />
         </Fill>

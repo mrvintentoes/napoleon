@@ -85,20 +85,20 @@ const Advance: React.FC<{l: number}> = ({l}) => {
               <Fill>
                 <AnimatedMap
                   cam={camAt(k, [
-                    [0, {lon: 20, lat: 54, zoom: 1.2, tilt: 50}],
-                    [74, {lon: 30, lat: 55, zoom: 0.9, tilt: 56, rot: -3}, DRIFT],
+                    [0, {lon: 26, lat: 55, zoom: 0.95, tilt: 40}],
+                    [74, {lon: 31, lat: 55.3, zoom: 0.75, tilt: 46, rot: -3}, DRIFT],
                   ])}
                   theme="snow"
                   rivers={['niemen', 'dnieper', 'berezina', 'moskva', 'vistula']}
                   labels={[
-                    {at: P('kovno'), text: 'NIEMEN', sub: 'crossed 24 June 1812', kind: 'region', appear: 4, size: 40},
+                    {at: P('kovno'), text: 'NIEMEN', sub: 'crossed 24 June 1812', kind: 'region', appear: 4, size: 52},
                     {at: P('vilna'), text: 'VILNA', appear: 20},
                     {at: P('vitebsk'), text: 'VITEBSK', appear: 34},
                     {at: P('smolensk'), text: 'SMOLENSK', appear: 48},
-                    {at: P('moscow'), text: 'MOSCOW', appear: 60, color: '#7a1a0e'},
+                    {at: P('moscow'), text: 'MOSCOW', appear: 60, color: '#7a1a0e', kind: 'battle', size: 60},
                   ]}
                 >
-                  <AnimatedArrow route={route('russia1812')} progress={prog(k, 0, 74, inCubic) * 0.62} color="#1f3f9a" width={22} head={70} glow />
+                  <AnimatedArrow route={route('russia1812')} progress={prog(k, 0, 70, inCubic)} color="#1f3f9a" width={30} head={90} glow />
                 </AnimatedMap>
                 <TypographyImpact text="WEST → EAST" mode="track" font="cond" size={52} y={300} color="#1d242b" tracking={0.5} />
               </Fill>

@@ -81,7 +81,7 @@ export const TypographyImpact: React.FC<ImpactProps> = (p) => {
     maxW,
   } = p;
   // estimate rendered width from per-font average glyph advance; shrink to fit the frame
-  const ADV: Record<FontKey, number> = {grotesk: 0.5, cond: 0.52, imperial: 0.86, didone: 0.6, archive: 0.66};
+  const ADV: Record<FontKey, number> = {grotesk: 0.58, cond: 0.56, imperial: 0.88, didone: 0.68, archive: 0.66};
   const longest = width ? 0 : Math.max(...text.split('\n').map((t) => t.length));
   const limit = maxW ?? (Math.abs(Math.abs(rot) - 90) < 5 ? 1820 : 1030);
   const est = size * (longest * (ADV[font] + tracking)) * scaleX;
