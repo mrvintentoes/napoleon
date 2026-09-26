@@ -14,7 +14,8 @@
     "render:tests": "bash scripts/render_tests.sh",
     "stills": "node scripts/stills.mjs NapoleonEdit 0.3",
     "audio:score": "python3 scripts/make_score.py && ffmpeg -y -loglevel error -i public/audio/main-track.wav -b:a 256k public/audio/main-track.mp3 && rm public/audio/main-track.wav && node scripts/scan-assets.mjs",
-    "audio:hyper": "python3 scripts/make_hyper.py && ffmpeg -y -loglevel error -i public/audio/main-track.wav -b:a 256k public/audio/main-track-hyper.mp3 && rm public/audio/main-track.wav && node scripts/scan-assets.mjs"
+    "audio:hyper": "python3 scripts/make_hyper.py && ffmpeg -y -loglevel error -i public/audio/main-track.wav -b:a 256k public/audio/main-track-hyper.mp3 && rm public/audio/main-track.wav && node scripts/scan-assets.mjs",
+    "audio:machine": "python3 scripts/make_machine.py && ffmpeg -y -loglevel error -i public/audio/main-track.wav -b:a 256k public/audio/main-track-machine.mp3 && rm public/audio/main-track.wav && node scripts/scan-assets.mjs"
   },
   "dependencies": {
     "@fontsource/anton": "^5.3.0",
