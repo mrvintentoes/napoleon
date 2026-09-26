@@ -53,7 +53,7 @@ export const SaintHelena: React.FC = () => {
       {f >= 360 && f < 470 ? (
         <Fill style={{opacity: kf(f, [[360, 0], [380, 1], [450, 1], [470, 0]])}}>
           <Fill style={{opacity: 1 - clamp((f - 390) / 45)}}>
-            <HistoricalImage id="consul" zoom={2.3 + (f - 360) * 0.002} place={{x: 0.5, y: 0.44}} filter="grayscale(1) brightness(0.55) contrast(1.1)" />
+            <HistoricalImage id="death_napoleon" zoom={kf(f, [[360, 1.6], [470, 1.9]])} place={{x: 0.5, y: 0.45}} filter="grayscale(0.6) brightness(0.7) contrast(1.05)" />
           </Fill>
           <Fill style={{opacity: clamp((f - 390) / 45)}}>
             <Figure id="consul_rider_sil" x={540} y={1000} h={1000} opacity={0.9} />

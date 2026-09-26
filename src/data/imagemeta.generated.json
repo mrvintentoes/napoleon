@@ -172,5 +172,189 @@
    367,
    800
   ]
+ },
+ "images/berezina_hess.jpg": {
+  "w": 2400,
+  "h": 1589
+ },
+ "images/brumaire_bouchot.jpg": {
+  "w": 2253,
+  "h": 2400
+ },
+ "images/coronation_david.jpg": {
+  "w": 2400,
+  "h": 1510
+ },
+ "images/death_napoleon.jpg": {
+  "w": 2400,
+  "h": 1741
+ },
+ "images/fontainebleau_adieux.jpg": {
+  "w": 2400,
+  "h": 1790
+ },
+ "images/fontainebleau_delaroche.jpg": {
+  "w": 1401,
+  "h": 2004
+ },
+ "images/jena_vernet.jpg": {
+  "w": 2400,
+  "h": 2032
+ },
+ "images/leipzig_sauerweid.jpg": {
+  "w": 2400,
+  "h": 1421
+ },
+ "images/marengo_lejeune.jpg": {
+  "w": 2400,
+  "h": 1778
+ },
+ "images/marie_louise.jpg": {
+  "w": 1543,
+  "h": 2400
+ },
+ "images/moscow_fire.jpg": {
+  "w": 2400,
+  "h": 1808
+ },
+ "images/napoleon_alps_david.jpg": {
+  "w": 2030,
+  "h": 2400
+ },
+ "images/napoleon_arcole.jpg": {
+  "w": 1956,
+  "h": 2400
+ },
+ "images/napoleon_austerlitz.jpg": {
+  "w": 2400,
+  "h": 1189
+ },
+ "images/napoleon_elba.jpg": {
+  "w": 1100,
+  "h": 823
+ },
+ "images/napoleon_study_david.jpg": {
+  "w": 1464,
+  "h": 2400
+ },
+ "images/napoleon_throne_ingres.jpg": {
+  "w": 1460,
+  "h": 2400
+ },
+ "images/napoleon_toulon.jpg": {
+  "w": 1749,
+  "h": 2253
+ },
+ "images/napoleon_waterloo.jpg": {
+  "w": 2400,
+  "h": 1390
+ },
+ "images/nile_orient.jpg": {
+  "w": 2400,
+  "h": 1686
+ },
+ "images/scotland_forever.jpg": {
+  "w": 2400,
+  "h": 1214
+ },
+ "images/third_of_may_goya.jpg": {
+  "w": 2400,
+  "h": 1850
+ },
+ "images/toulon_assault.jpg": {
+  "w": 1690,
+  "h": 2400
+ },
+ "images/trafalgar_turner.jpg": {
+  "w": 2400,
+  "h": 1692
+ },
+ "images/wellington_lawrence.jpg": {
+  "w": 1756,
+  "h": 2400
+ },
+ "images/cut/fontainebleau_delaroche_fg.png": {
+  "w": 1401,
+  "h": 2004
+ },
+ "images/cut/fontainebleau_delaroche_plate.jpg": {
+  "w": 1401,
+  "h": 2004
+ },
+ "images/cut/fontainebleau_delaroche_sil.png": {
+  "w": 1401,
+  "h": 2004
+ },
+ "images/cut/moscow_fire_fg.png": {
+  "w": 2400,
+  "h": 1808
+ },
+ "images/cut/moscow_fire_plate.jpg": {
+  "w": 2400,
+  "h": 1808
+ },
+ "images/cut/moscow_fire_sil.png": {
+  "w": 2400,
+  "h": 1808
+ },
+ "images/cut/napoleon_alps_david_fg.png": {
+  "w": 2030,
+  "h": 2400
+ },
+ "images/cut/napoleon_alps_david_plate.jpg": {
+  "w": 2030,
+  "h": 2400
+ },
+ "images/cut/napoleon_alps_david_sil.png": {
+  "w": 2030,
+  "h": 2400
+ },
+ "images/cut/napoleon_elba_fg.png": {
+  "w": 1100,
+  "h": 823
+ },
+ "images/cut/napoleon_elba_plate.jpg": {
+  "w": 1100,
+  "h": 823
+ },
+ "images/cut/napoleon_elba_sil.png": {
+  "w": 1100,
+  "h": 823
+ },
+ "images/cut/napoleon_study_david_fg.png": {
+  "w": 1464,
+  "h": 2400
+ },
+ "images/cut/napoleon_study_david_plate.jpg": {
+  "w": 1464,
+  "h": 2400
+ },
+ "images/cut/napoleon_study_david_sil.png": {
+  "w": 1464,
+  "h": 2400
+ },
+ "images/cut/napoleon_throne_ingres_fg.png": {
+  "w": 1460,
+  "h": 2400
+ },
+ "images/cut/napoleon_throne_ingres_plate.jpg": {
+  "w": 1460,
+  "h": 2400
+ },
+ "images/cut/napoleon_throne_ingres_sil.png": {
+  "w": 1460,
+  "h": 2400
+ },
+ "images/cut/napoleon_toulon_fg.png": {
+  "w": 1749,
+  "h": 2253
+ },
+ "images/cut/napoleon_toulon_plate.jpg": {
+  "w": 1749,
+  "h": 2253
+ },
+ "images/cut/napoleon_toulon_sil.png": {
+  "w": 1749,
+  "h": 2253
  }
 }

@@ -165,12 +165,20 @@ const Nile: React.FC<{l: number}> = ({l}) => {
         <ChromaticAberration amount={hit * 22 + 3}>
           <Fill style={{background: `linear-gradient(180deg, #050b14 0%, #0b1a2a 55%, ${burn > 0 ? '#3a0a02' : '#0b1a2a'} 100%)`}}>
             <Fill style={{background: `radial-gradient(circle at 50% 70%, rgba(255,120,30,${burn * 0.9}) 0%, rgba(120,20,5,${burn * 0.5}) 35%, transparent 70%)`}} />
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} style={{position: 'absolute', left: -60 + i * 280, top: 1080 + (i % 2) * 90 + burn * 40, transform: `scale(${0.7 + (i % 2) * 0.2}) rotate(${burn * (i % 2 ? 8 : -6)}deg)`, filter: `brightness(${1 - burn * 0.5})`}}>
-                <Ship size={420} color="#030507" fire={burn * (0.6 + rnd(2, i + Math.floor(l / 3)) * 0.4)} />
-              </div>
-            ))}
+            {l < 26
+              ? [0, 1, 2, 3].map((i) => (
+                  <div key={i} style={{position: 'absolute', left: -60 + i * 280, top: 1080 + (i % 2) * 90, transform: `scale(${0.7 + (i % 2) * 0.2})`}}>
+                    <Ship size={420} color="#030507" />
+                  </div>
+                ))
+              : (
+                  // Arnald: L'Orient explodes. Push into the blast.
+                  <Fill style={{filter: `brightness(${1 + pulse(l, 40, 10) * 0.9}) contrast(1.15)`}}>
+                    <HistoricalImage id="nile_orient" zoom={kf(l, [[26, 1.05], [122, 1.45, DRIFT]])} place={{x: 0.42, y: 0.5}} focus={{x: 0.3, y: 0.42}} />
+                  </Fill>
+                )}
             <ParticleField kind="embers" density={140} speed={2.2} seed={9} opacity={burn} size={1.5} />
+            <Fill style={{background: 'linear-gradient(180deg, rgba(5,11,20,0.75) 0%, transparent 40%, transparent 70%, rgba(5,11,20,0.8) 100%)'}} />
             <Smoke count={7} seed={40} opacity={0.5 * burn} y={1100} speed={4} tint="brightness(0.25)" />
             <TypographyImpact text="NELSON" at={0} out={24} outMode="cut" mode="slam" font="grotesk" size={330} y={560} color="#c8102e" chroma={10} />
             <TypographyImpact text="ABOUKIR BAY" at={26} out={50} outMode="cut" mode="stretch" font="grotesk" size={170} y={520} color="#e9f2ff" />
@@ -181,6 +189,7 @@ const Nile: React.FC<{l: number}> = ({l}) => {
         </ChromaticAberration>
       </SliceGlitch>
       <Flashes ats={[0, 26, 52]} len={1} color="#fff" tail={4} />
+      <FlashFrame at={40} len={2} color="#fff3d0" tail={10} />
     </CameraShake>
   );
 };

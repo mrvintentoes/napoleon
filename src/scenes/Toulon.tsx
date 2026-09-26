@@ -53,6 +53,10 @@ const SiegeBuild: React.FC<{l: number}> = ({l}) => {
         <MapPing at={P('toulon')} t={((l % 20) / 20) * (l > 40 ? 1 : 0)} color="#ffcf6b" r={160} />
       </AnimatedMap>
       <Tint color="#6d0a10" opacity={0.25} blend="multiply" />
+      {/* 1793 engraving of the assault strobes in over the map as the build tightens */}
+      {l >= 52 && Math.floor((l - 52) / 5) % 2 === 0 ? (
+        <HistoricalImage id="toulon_assault" zoom={1.25 + (l - 52) * 0.012} place={{x: 0.5, y: 0.5}} filter="sepia(0.6) contrast(1.4) brightness(0.9)" opacity={0.9} />
+      ) : null}
       {/* the enemy fleet in the harbour, streaking guns */}
       <div style={{position: 'absolute', left: 1080 - l * 3, top: 1320, opacity: 0.9}}>
         <Ship size={380} color="#0a0304" />
@@ -87,7 +91,7 @@ const Promotion: React.FC<{l: number}> = ({l}) => {
           </Fill>
           <ZoomStreaks amount={hit * 0.9 + 0.15} color="255,210,140" />
           <Cam s={rocket} y={kf(l, [[0, 300], [16, 0, SLAM]])}>
-            <Figure id="harangue_nap" x={540} y={1330} h={1450} filter="contrast(1.25) saturate(1.2) sepia(0.2)" />
+            <Figure id="napoleon_toulon_fg" x={560} y={1260} h={1500} filter="contrast(1.2) saturate(1.15) drop-shadow(0 0 40px rgba(0,0,0,0.8))" />
           </Cam>
           <Smoke count={9} seed={12} opacity={0.85 * (1 - smokeClear) + 0.15} y={1300} spread={1100} scale={1.4} speed={6} tint="sepia(1) hue-rotate(-20deg) brightness(0.6)" />
           <ParticleField kind="sparks" density={70} speed={1.4} seed={4} dir={-90} opacity={hit * 1.2} size={1.5} />

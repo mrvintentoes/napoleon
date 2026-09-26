@@ -50,6 +50,13 @@ const Coup: React.FC<{l: number}> = ({l}) => {
             style={{textDecoration: l > 14 + i * 3 ? 'line-through' : 'none', textDecorationThickness: 6}}
           />
         ))}
+        {/* Bouchot: grenadiers break into the Council of Five Hundred */}
+        {l >= 42 && l < 66 ? (
+          <Fill>
+            <HistoricalImage id="brumaire_bouchot" zoom={kf(l, [[42, 1.15], [66, 1.6, outExpo]])} place={{x: 0.5, y: 0.42}} filter="contrast(1.15) saturate(1.1)" />
+            <Fill style={{background: 'linear-gradient(180deg, rgba(0,0,0,0.6), transparent 35%)'}} />
+          </Fill>
+        ) : null}
         {/* the new one slams in */}
         {l >= 64 ? (
           <div style={{position: 'absolute', left: 540, top: 900, transform: `translate(-50%,-50%) translateX(${kf(l, [[64, 1300], [76, 0, SLAM]])}px) rotate(${kf(l, [[64, 12], [76, 2, SLAM]])}deg)`}}>
@@ -104,13 +111,22 @@ const Marengo: React.FC<{l: number}> = ({l}) => {
               30,
               (k) => (
                 <Fill style={{background: '#e7dcc6'}}>
-                  <HistoricalImage id="napoleon_alps" zoom={1.35 + k * 0.01} place={{x: 0.5, y: 0.35}} filter="contrast(1.25) saturate(1.3)" />
+                  <HistoricalImage id="napoleon_alps_david" zoom={1.35 + k * 0.01} place={{x: 0.5, y: 0.35}} filter="contrast(1.25) saturate(1.3)" />
                   <Tint color="#0b2a78" opacity={0.25} blend="multiply" />
                   <BattleTitle name="MARENGO" date="14 June 1800" at={0} y={1480} size={250} color="#fff" accent="#f3e2a6" />
                 </Fill>
               ),
             ],
-            ...[0, 1, 2, 3].map(
+            [
+              14,
+              (k) => (
+                <Fill>
+                  <HistoricalImage id="marengo_lejeune" zoom={1.9} place={{x: 0.5 - k * 0.012, y: 0.55}} filter="contrast(1.2) saturate(1.2)" />
+                  <TypographyImpact text="14 JUNE 1800" mode="cut" font="archive" size={44} y={300} color="#fff" tracking={0.3} weight={600} shadow="0 0 20px #000" />
+                </Fill>
+              ),
+            ],
+            ...[0, 2, 3].map(
               (i) =>
                 [
                   14,
@@ -171,7 +187,7 @@ const Machinery: React.FC<{l: number}> = ({l}) => {
         <OrbitItem key={i} it={it} spin={spin} suck={suck} layer="back" hl={pulseIdx % ITEMS.length === i} />
       ))}
       <Cam s={kf(l, [[0, 0.85], [40, 1, CAMERA], [186, 1.02], [220, 0.2, inExpo]])} filter={suck > 0 ? `blur(${suck * 10}px)` : undefined}>
-        <Figure id="consul_rider" x={540} y={1050} h={1100} filter="drop-shadow(0 0 40px rgba(243,226,166,0.35))" />
+        <Figure id="napoleon_study_david_fg" x={540} y={1020} h={1250} filter="drop-shadow(0 0 40px rgba(243,226,166,0.35))" />
       </Cam>
       {ITEMS.map((it, i) => (
         <OrbitItem key={`f${i}`} it={it} spin={spin} suck={suck} layer="front" hl={pulseIdx % ITEMS.length === i} />

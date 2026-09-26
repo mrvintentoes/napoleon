@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Fill, Seg, Cam, Figure, HistoricalImage, TypographyImpact, Caption, NameMotif, BattleTitle, AnimatedMap, AnimatedArrow, MapPing,
+  Fill, Seg, Cam, Figure, HistoricalImage, ParallaxPainting, TypographyImpact, Caption, NameMotif, BattleTitle, AnimatedMap, AnimatedArrow, MapPing,
   camAt, Doc, EagleEmblem, SliceGlitch, FlashFrame, Flashes, CameraShake, ParticleField, Tint, POWER, MARKERS,
   kf, clamp, prog, pulse, pulses, outExpo, inCubic, CAMERA, P, route,
 } from './_kit';
@@ -79,7 +79,20 @@ const Fall: React.FC<{l: number}> = ({l}) => (
     ) : null}
     {l >= 40 && l < 100 ? (
       <Fill style={{background: '#1c1c1c'}}>
-        <div style={{position: 'absolute', left: 540, top: 1000, transform: `translate(-50%,-50%) scale(${kf(l, [[40, 1.05], [100, 0.98]])}) rotate(-2deg)`, filter: 'grayscale(1)'}}>
+        {/* Delaroche: Napoleon at Fontainebleau — the whole collapse in one slumped figure */}
+        <Fill style={{opacity: l < 70 ? 1 : 1 - clamp((l - 70) / 6)}}>
+          <ParallaxPainting
+            base="fontainebleau_delaroche"
+            layers={[
+              {id: 'fontainebleau_delaroche_plate', depth: 0.2, filter: 'grayscale(0.7) brightness(0.6)'},
+              {id: 'fontainebleau_delaroche_fg', depth: 1, filter: 'grayscale(0.35) contrast(1.1)'},
+            ]}
+            zoom={1.1}
+            place={{x: 0.5, y: 0.34}}
+            cam={{x: kf(l, [[40, -30], [70, 20]]), z: (l - 40) * 0.003}}
+          />
+        </Fill>
+        <div style={{position: 'absolute', left: 540, top: 1000, opacity: clamp((l - 70) / 4), transform: `translate(-50%,-50%) scale(${kf(l, [[40, 1.05], [100, 0.98]])}) rotate(-2deg)`, filter: 'grayscale(1)'}}>
           <Doc title="ACTE D'ABDICATION" sub="Fontainebleau · 6 avril 1814" w={620} h={820} seed={33} seal="N" reveal={clamp((l - 44) / 30)} />
         </div>
         <TypographyImpact text="FONTAINEBLEAU" at={42} mode="track" font="imperial" size={70} y={330} color="#c8c8c8" tracking={0.25} />
@@ -88,6 +101,9 @@ const Fall: React.FC<{l: number}> = ({l}) => (
     ) : null}
     {l >= 96 ? (
       <Fill style={{background: '#111'}}>
+        {/* Vernet: farewell to the Guard, 20 April 1814 */}
+        <HistoricalImage id="fontainebleau_adieux" zoom={1.25 + (l - 96) * 0.004} place={{x: 0.5, y: 0.45}} filter="grayscale(0.85) brightness(0.5) contrast(1.1)" />
+        <TypographyImpact text="ADIEUX · 20 APRIL 1814" at={98} mode="track" font="archive" size={30} y={300} color="#c8c8c8" tracking={0.3} weight={600} />
         <EagleEmblem state="falling" size={640} y={820} at={96} />
         <NameMotif from={POWER.y1814} at={96} text="NAPOLEON" y={1500} color="#6f6f6f" tracking={0.4} />
         <TypographyImpact text="ELBA" at={104} mode="flicker" font="archive" size={34} y={1580} color="#8aa0ab" tracking={0.6} weight={600} />

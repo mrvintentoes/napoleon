@@ -68,38 +68,23 @@ export const Memory: React.FC<{kind: MemoryKind; f?: number; damage?: number; wo
     case 'marengo':
       body = (
         <>
-          <HistoricalImage id="napoleon_alps" zoom={1.1} place={{x: 0.45, y: 0.3}} filter="contrast(1.2) saturate(1.3)" />
+          <HistoricalImage id="napoleon_alps_david" zoom={1.1} place={{x: 0.45, y: 0.3}} filter="contrast(1.2) saturate(1.3)" />
         </>
       );
       break;
     case 'coronation':
-      body = (
-        <>
-          <Fill style={{background: '#0d1a4a'}} />
-          <BeeField opacity={0.35} size={110} />
-          <div style={{position: 'absolute', left: 190, top: 560}}>
-            <Crown size={700} glow />
-          </div>
-        </>
-      );
+      body = <HistoricalImage id="coronation_david" zoom={2.4} place={{x: 0.5, y: 0.4}} filter="saturate(1.3)" />;
       break;
     case 'austerlitz':
       body = (
         <>
-          <Sunburst c1="#ffd76a" c2="#e07a1f" rays={28} />
-          <HistoricalImage id="napoleon_austerlitz" zoom={1.1} blend="multiply" opacity={0.55} />
+          <HistoricalImage id="napoleon_austerlitz" zoom={2.2} place={{x: 0.5, y: 0.4}} filter="saturate(1.3) contrast(1.1)" />
+          <Sunburst c1="rgba(255,215,106,0.35)" c2="rgba(224,122,31,0)" rays={28} />
         </>
       );
       break;
     case 'jena':
-      body = (
-        <>
-          <Fill style={{background: '#0b2a78'}} />
-          <div style={{position: 'absolute', left: 0, top: 760}}>
-            <BrandenburgGate color="#f4f1ea" />
-          </div>
-        </>
-      );
+      body = <HistoricalImage id="jena_vernet" zoom={1.5} place={{x: 0.5, y: 0.4}} filter="contrast(1.15)" />;
       break;
     case 'friedland':
       body = (
@@ -128,14 +113,7 @@ export const Memory: React.FC<{kind: MemoryKind; f?: number; damage?: number; wo
       );
       break;
     case 'moscow':
-      body = (
-        <>
-          <Fill style={{background: 'linear-gradient(0deg, #ff7a1a, #5a0e05 60%, #120302)'}} />
-          <div style={{position: 'absolute', left: 0, top: 1000}}>
-            <MoscowSkyline />
-          </div>
-        </>
-      );
+      body = <HistoricalImage id="moscow_fire" zoom={1.4} place={{x: 0.5, y: 0.45}} filter="saturate(1.3) contrast(1.1)" />;
       break;
     case 'elba':
       body = (

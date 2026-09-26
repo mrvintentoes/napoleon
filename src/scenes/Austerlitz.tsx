@@ -50,12 +50,8 @@ const Coalition: React.FC<{l: number}> = ({l}) => {
         })}
         {l >= 36 && l < 52 ? (
           <Fill style={{background: '#06101a'}}>
-            <div style={{position: 'absolute', left: 60, top: 900}}>
-              <Ship size={480} color="#000" fire={0.6} />
-            </div>
-            <div style={{position: 'absolute', left: 560, top: 980, transform: 'scaleX(-1)'}}>
-              <Ship size={440} color="#000" fire={0.6} />
-            </div>
+            <HistoricalImage id="trafalgar_turner" zoom={1.1 + (l - 36) * 0.01} place={{x: 0.5, y: 0.5}} filter="contrast(1.1)" />
+            <Fill style={{background: 'linear-gradient(180deg, rgba(6,16,26,0.8), transparent 40%)'}} />
             <TypographyImpact text="TRAFALGAR" mode="cut" font="grotesk" size={210} y={560} color="#e9eef1" />
             <TypographyImpact text="21 OCTOBER 1805 · NELSON'S FLEET WINS AT SEA" mode="cut" font="archive" size={30} y={680} color="#9fb6c8" tracking={0.12} weight={600} />
           </Fill>
@@ -157,10 +153,11 @@ const Hit: React.FC<{l: number}> = ({l}) => {
           {l < 26 ? (
             <Fill style={{background: '#ffcf6b'}}>
               <Sunburst c1="#fff3c0" c2="#f0a33a" rays={32} speed={1.5} />
-              <HistoricalImage id="napoleon_austerlitz" zoom={1.2 + l * 0.01} blend="multiply" opacity={0.6} filter="sepia(1) saturate(2)" />
+              <HistoricalImage id="napoleon_austerlitz" zoom={1.25 + l * 0.012} place={{x: 0.5, y: 0.5}} blend="multiply" opacity={0.85} filter="sepia(0.8) saturate(1.8) contrast(1.2)" />
               <TypographyImpact text="1805" noFit mode="cut" font="didone" size={700} y={1050} color="rgba(120,50,0,0.18)" />
-              <TypographyImpact text="AUSTERLITZ" at={0} mode="slam" font="grotesk" size={250} y={900} color="#2a1200" />
-              <TypographyImpact text="2 DECEMBER 1805" at={2} mode="track" font="archive" size={40} y={740} color="#5a2a00" tracking={0.3} weight={600} />
+              <Fill style={{background: 'radial-gradient(ellipse 80% 22% at 50% 47%, rgba(20,8,0,0.75), transparent 70%)'}} />
+              <TypographyImpact text="AUSTERLITZ" at={0} mode="slam" font="grotesk" size={250} y={900} color="#fff4d6" glow="rgba(255,190,80,0.7)" />
+              <TypographyImpact text="2 DECEMBER 1805" at={2} mode="track" font="archive" size={40} y={740} color="#fff4d6" tracking={0.3} weight={600} />
             </Fill>
           ) : null}
           {/* 26–38: dense victory overload (2-frame cuts) */}
@@ -298,7 +295,7 @@ const Overload: React.FC<{l: number}> = ({l}) => {
         <NameMotif from={POWER.y1805} at={0} text="NAPOLEON" y={960} color="#f3e2a6" tracking={-0.01} />
       </Fill>
     ),
-    (k) => <HistoricalImage id="consul_fried" zoom={2.4} place={{x: 0.5, y: 0.4}} />,
+    (k) => <HistoricalImage id="napoleon_austerlitz" zoom={2.6} place={{x: 0.5, y: 0.4}} filter="saturate(1.4) contrast(1.2)" />,
     (k) => <Memory kind="tilsit" f={k} word={false} />,
     (k) => <HistoricalImage id="harangue_fried" zoom={2} place={{x: 0.5, y: 0.35}} />,
     (k) => <Fill style={{background: '#fff'}} />,

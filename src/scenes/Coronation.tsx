@@ -54,14 +54,20 @@ const NotreDameFlight: React.FC<{l: number}> = ({l}) => {
       <ChromaticAberration amount={hit * 14}>
         <Fill style={{background: 'radial-gradient(ellipse at 50% 40%, #ffe7a8 0%, #d9a93e 18%, #5a3a0a 45%, #0d0a14 80%)'}}>
           {david ? (
-            <ParallaxPainting base="coronation_david" layers={[{id: 'coronation_david', depth: 0.4}]} zoom={1.2 + travel * 0.15} place={{x: 0.5, y: 0.45}} filter="saturate(1.2)" />
+            <ParallaxPainting
+              base="coronation_david"
+              layers={[{id: 'coronation_david', depth: 0.4}]}
+              zoom={kf(l, [[0, 1.0], [70, 2.3, CAMERA], [150, 2.6]])}
+              place={{x: 0.5, y: kf(l, [[0, 0.5], [70, 0.36, CAMERA]])}}
+              filter={`saturate(1.2) brightness(${kf(l, [[0, 0.55], [40, 1]])})`}
+            />
           ) : (
             <Sunburst c1="rgba(255,236,190,0.35)" c2="rgba(217,169,62,0)" rays={40} speed={0.5} y="38%" />
           )}
           {/* nave arches, back to front */}
           {Array.from({length: 9}, (_, i) => {
             const z = i - travel * 2; // distance
-            if (z < -0.6) return null;
+            if (z < -0.6 || (david && l > 18)) return null;
             const s = 1 / (0.35 + z * 0.35);
             const w = 520 * s;
             const h = 1100 * s;
@@ -74,15 +80,16 @@ const NotreDameFlight: React.FC<{l: number}> = ({l}) => {
           })}
           <ParticleField kind="gold" density={90} speed={0.6} seed={22} opacity={0.9} size={1.1} />
           {/* he crowns himself: raised arm holds the crown */}
-          <Cam s={kf(l, [[0, 0.5], [70, 0.95, outExpo], [150, 1.05]])} origin="50% 70%">
+          {david ? null : <Cam s={kf(l, [[0, 0.5], [70, 0.95, outExpo], [150, 1.05]])} origin="50% 70%">
             <Figure id="harangue_nap_sil" x={540} y={1130} h={1150} opacity={0.96} />
             <div style={{position: 'absolute', left: 700 - 70, top: 520 - 60 + kf(l, [[0, -200], [60, 0, OVERSHOOT]])}}>
               <Laurel size={150} grow={clamp(l / 60)} />
             </div>
-          </Cam>
+          </Cam>}
+          {david ? <Fill style={{background: 'linear-gradient(180deg, rgba(13,10,20,0.7) 0%, transparent 25%, transparent 62%, rgba(13,10,20,0.92) 78%)'}} /> : null}
           <TypographyImpact text="NOTRE-DAME" at={10} out={66} mode="track" font="imperial" size={60} y={300} color="#fff1c8" tracking={0.35} />
           <TypographyImpact text="2 DECEMBER 1804" at={16} out={66} mode="track" font="archive" size={40} y={380} color="#ffe7a8" tracking={0.3} weight={600} />
-          <Caption text="he crowns himself" at={36} out={66} y={1640} color="#fff1c8" size={40} />
+          <Caption text="he crowns himself — then Joséphine" at={36} out={66} y={1640} color="#fff1c8" size={40} />
           {/* The name fills the screen */}
           <TypographyImpact text="I" at={70} mode="slam" font="imperial" size={1500} y={1000} color="rgba(255,231,168,0.14)" />
           <TypographyImpact text="NAPOLEON" at={70} mode="slam" font="imperial" size={172} y={1450} color="#fff4d0" tracking={0.02} glow="rgba(255,190,80,0.6)" />
@@ -104,7 +111,13 @@ const Imperial: React.FC<{l: number}> = ({l}) => {
       <Fill style={{background: '#0d1a4a'}}>
         <BeeField opacity={0.28} size={100} offset={l * 1.5} />
         <Fill style={{background: 'radial-gradient(circle at 50% 50%, rgba(217,169,62,0.4), transparent 60%)'}} />
-        <EagleEmblem state="strong" size={900} y={860} at={0} />
+        {l < 30 ? (
+          <Cam s={kf(l, [[0, 1.25], [8, 1, SLAM], [30, 1.04]])}>
+            <Figure id="napoleon_throne_ingres_fg" x={540} y={960} h={1780} filter="drop-shadow(0 0 60px rgba(0,0,0,0.9))" />
+          </Cam>
+        ) : (
+          <EagleEmblem state="strong" size={900} y={860} at={30} />
+        )}
         {/* the name changes: BONAPARTE -> NAPOLEON */}
         {l < 30 ? <NameMotif from={POWER.y1799} at={0} y={1500} color="#f3e2a6" tracking={0.05} opacity={1 - clamp((l - 18) / 10)} /> : null}
         <NameMotif from={POWER.y1799} to={POWER.y1804} at={30} dur={16} text="NAPOLEON" y={1520} color="#f3e2a6" tracking={0.02} />

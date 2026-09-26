@@ -34,7 +34,7 @@ const Madrid: React.FC<{l: number}> = ({l}) => {
   return (
     <CameraShake amp={hit * 30 + 3} speed={1.2}>
       <Fill style={{background: '#7a1a0e'}}>
-        <HistoricalImage id="third_of_may" zoom={1.25 + l * 0.004} place={{x: 0.5, y: 0.5}} opacity={0.9} />
+        <HistoricalImage id="third_of_may_goya" zoom={1.25 + l * 0.004} place={{x: 0.5, y: 0.5}} opacity={0.9} />
         <Tint color="#7a1a0e" opacity={0.45} blend="multiply" />
         <Smoke count={5} seed={80} opacity={0.35} tint="brightness(0.2)" y={1500} speed={3} />
         <TypographyImpact text="1808" mode="slam" font="didone" size={360} y={330} color="#0a0a0a" out={20} outMode="cut" />
@@ -86,7 +86,7 @@ const Peninsula: React.FC<{l: number}> = ({l}) => (
           30,
           (k) => (
             <Fill style={{background: '#0a0a0a'}}>
-              <ParallaxPainting base="wellington" layers={[{id: 'wellington', depth: 0.4, filter: 'contrast(1.2)'}]} zoom={1.4} place={{x: 0.5, y: 0.34}} cam={{z: k * 0.006}} />
+              <ParallaxPainting base="wellington_lawrence" layers={[{id: 'wellington_lawrence', depth: 0.4, filter: 'contrast(1.2)'}]} zoom={1.4} place={{x: 0.5, y: 0.34}} cam={{z: k * 0.006}} />
               <Fill style={{background: 'linear-gradient(0deg, #0a0a0a 5%, transparent 50%)'}} />
               <TypographyImpact text="WELLESLEY" mode="slam" font="grotesk" size={210} y={1440} color="#fff" />
               <TypographyImpact text="LATER DUKE OF WELLINGTON" at={4} mode="track" font="archive" size={34} y={1560} color="#ff9a9a" tracking={0.25} weight={600} />
@@ -177,9 +177,8 @@ const Dynasty: React.FC<{l: number}> = ({l}) => (
           22,
           (k) => (
             <Fill>
-              <div style={{position: 'absolute', left: 290, top: 520, transform: `scale(${1 + k * 0.01})`}}>
-                <Crown size={500} spin={k * 0.08} glow />
-              </div>
+              <HistoricalImage id="marie_louise" zoom={1.35 + k * 0.006} place={{x: 0.5, y: 0.3}} filter="contrast(1.1) saturate(1.1)" />
+              <Fill style={{background: 'linear-gradient(0deg, rgba(13,26,74,0.95) 25%, transparent 55%)'}} />
               <TypographyImpact text="MARIE-LOUISE" mode="slam" font="imperial" size={100} y={1250} color="#f3e2a6" />
               <Caption text="archduchess of Austria · married April 1810" at={2} y={1350} color="#e9f2ff" size={30} />
             </Fill>

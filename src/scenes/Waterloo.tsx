@@ -97,13 +97,10 @@ const Battle: React.FC<{l: number}> = ({l}) => {
       30,
       (k) => (
         <Fill style={{background: '#3d4a36'}}>
-          {[0, 1].map((r) => (
-            <div key={r} style={{position: 'absolute', left: 1100 - k * (6 + r * 2) - r * 60 - 1200, top: 1040 + r * 240}}>
-              <InfantryRank count={34} spacing={40} h={260 + r * 90} color="#9b1a1a" hat="shako" frame={k} seed={r + 233} />
-            </div>
-          ))}
-          <TypographyImpact text="BRITISH LINES" mode="cut" font="grotesk" size={130} y={420} color="#f2e6c8" />
-          <Caption text="the ridge of Mont-Saint-Jean" at={2} y={540} color="#c9b98a" />
+          <HistoricalImage id="scotland_forever" zoom={1.15 + k * 0.02} place={{x: 0.5, y: 0.55}} filter="contrast(1.1) saturate(1.1)" />
+          <Fill style={{background: 'linear-gradient(180deg, rgba(61,74,54,0.8), transparent 35%)'}} />
+          <TypographyImpact text="BRITISH CAVALRY" mode="cut" font="grotesk" size={130} y={320} color="#f2e6c8" />
+          <Caption text="the Union Brigade charges d'Erlon's infantry" at={2} y={440} color="#f2e6c8" />
         </Fill>
       ),
     ],
@@ -126,7 +123,7 @@ const Battle: React.FC<{l: number}> = ({l}) => {
       30,
       (k) => (
         <Fill style={{background: '#111'}}>
-          <ParallaxPainting base="wellington" layers={[{id: 'wellington', depth: 0.4, filter: 'grayscale(0.4) contrast(1.2)'}]} zoom={1.5} place={{x: 0.5, y: 0.34}} cam={{z: k * 0.008}} />
+          <ParallaxPainting base="wellington_lawrence" layers={[{id: 'wellington_lawrence', depth: 0.4, filter: 'grayscale(0.4) contrast(1.2)'}]} zoom={1.5} place={{x: 0.5, y: 0.34}} cam={{z: k * 0.008}} />
           <Fill style={{background: 'linear-gradient(0deg, #111 10%, transparent 50%)'}} />
           <TypographyImpact text="WELLINGTON" mode="slam" font="grotesk" size={200} y={1480} color="#fff" />
         </Fill>

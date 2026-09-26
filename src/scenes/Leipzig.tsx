@@ -122,6 +122,10 @@ const Nations: React.FC<{l: number}> = ({l}) => {
               <MapPing at={P('leipzig')} t={(l % 30) / 30} r={300} color="#ff5a3a" />
             </AnimatedMap>
           </Cam>
+          {/* Sauerweid: the Battle of the Nations cut in on the hits */}
+          {l < 86 && Math.floor(l / 10) % 2 === 0 ? (
+            <HistoricalImage id="leipzig_sauerweid" zoom={1.5 + (l % 20) * 0.01} place={{x: [0.3, 0.6, 0.45, 0.7, 0.5][Math.floor(l / 20) % 5], y: 0.6}} filter="contrast(1.25) saturate(0.85) sepia(0.2)" />
+          ) : null}
           <Fill style={{background: 'linear-gradient(180deg, rgba(43,38,32,0.9), transparent 35%)'}} />
           <TypographyImpact text="LEIPZIG" at={0} mode="slam" font="grotesk" size={330} y={330} color="#fff" out={86} outMode="blur" chroma={6} />
           <TypographyImpact text="16–19 OCTOBER 1813" at={4} mode="track" font="archive" size={40} y={500} color="#f2e6c8" tracking={0.3} weight={600} out={86} />

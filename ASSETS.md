@@ -18,36 +18,44 @@ The historical art comes from paintings that are **in the public domain** (every
 - `images/cut/watteau_flag_fg.png` is the tricolour standard cut out of the Watteau painting.
 - `images/*_fried.jpg` are "deep-fried" treatments (real JPEG crunch), and `*_halftone.jpg` are halftone renders.
 
-## 2. Placeholder slots — drop the file in and it switches on automatically
+## 2. Paintings added in round 2 (all public domain, from Wikimedia Commons; most supplied directly by the user)
 
-Each slot below currently renders its **fallback** (a colour-graded crop of one of the paintings above). To activate a slot, save the recommended public-domain image under the **exact filename**, then run `npm run scan` (the `dev` and `render` scripts also run it for you).
+Each one is saved in `assets_src/commons/` and imported to `public/images/<slot>.jpg` by `scripts/import_paintings.py`. That script also writes Napoleon cutouts, clean plates and silhouettes to `public/images/cut/`. `assets_src/commons/manifest.json` lists the Commons page for the four files that were downloaded directly.
 
-| Exact filename | Recommended public-domain work | Where it appears | Current fallback |
-|---|---|---|---|
-| `napoleon_toulon.jpg` | Philippoteaux, *Napoleon as Lt-Col of the 1st Battalion of Corsica* (1834), or a Toulon siege engraving | Toulon | Gros 1802 halftone |
-| `napoleon_arcole.jpg` | Antoine-Jean Gros, *Bonaparte on the Pont d'Arcole* (1796) | Italy (opening + freeze frame + memories) | Gros 1810, sepia |
-| `napoleon_alps_david.jpg` | Jacques-Louis David, *Napoleon Crossing the Alps* (1801) | Marengo, memories | Gros 1802 |
-| `coronation_david.jpg` | Jacques-Louis David, *The Coronation of Napoleon* (1805–07) | Coronation (placed inside the nave fly-through) | procedural nave + sunburst |
-| `napoleon_throne_ingres.jpg` | Ingres, *Napoleon I on his Imperial Throne* (1806) | (reserved) | Gros 1802 |
-| `napoleon_austerlitz.jpg` | François Gérard, *The Battle of Austerlitz* (1810) | Austerlitz hit, memories | Watteau, sepia |
-| `jena_vernet.jpg` | Horace Vernet, *Napoleon at Jena* (1836) | Jena | Gros 1802 halftone |
-| `eylau_gros.jpg` | Antoine-Jean Gros, *Napoleon on the Battlefield of Eylau* (1808) | Eylau | Gros 1810, grayscale |
-| `tilsit_meeting.jpg` | Adolphe Roehn (after), *Meeting on the Niemen* (1807) | (reserved) | — |
-| `third_of_may_goya.jpg` | Francisco Goya, *The Third of May 1808* (1814) | Madrid | Watteau fried, burnt red |
-| `wellington_lawrence.jpg` | Thomas Lawrence, *Duke of Wellington* (1815–16) | Spain, Waterloo | Gros halftone, red |
-| `wagram_vernet.jpg` | Horace Vernet, *The Battle of Wagram* (1836) | Wagram, memories | Watteau, cold |
-| `borodino_lejeune.jpg` | Louis-François Lejeune, *The Battle of Borodino* (1822) | Borodino | Watteau fried, mono |
-| `moscow_fire.jpg` | Albrecht Adam or Adolph Northen, *Napoleon in burning Moscow* | (reserved; Moscow is procedural) | — |
-| `retreat_russia.jpg` | Adolph Northen, *Napoleon's Retreat from Moscow* (1851) | (reserved) | rider silhouette |
-| `leipzig_sauerweid.jpg` | Alexander Sauerweid, *Battle of Leipzig* (1815) | (reserved) | — |
-| `fontainebleau_adieux.jpg` | Montfort after Vernet, *Les Adieux de Fontainebleau* | (reserved) | — |
-| `napoleon_elba.jpg` | Joseph Beaume, *Napoleon leaving Elba* (1836) | (reserved) | — |
-| `napoleon_waterloo.jpg` | Clément-Auguste Andrieux, *The Battle of Waterloo* (1852) | Waterloo title | Watteau, muddy green |
-| `napoleon_st_helena.jpg` | Franz Josef Sandmann, *Napoleon on Saint Helena* (c. 1820) | (reserved) | — |
-| `napoleon_study_david.jpg` | David, *The Emperor Napoleon in His Study at the Tuileries* (1812) | (reserved) | Gros 1802 |
-| `death_mask.jpg` | Photo of the Antommarchi death mask (check the photo's licence) | (reserved) | — |
+| Slot | Work | Artist | Date | Used in |
+|---|---|---|---|---|
+| `napoleon_toulon` | *Bonaparte at the Siege of Toulon* | Édouard Detaille | late 19th c. | Toulon promotion (cut out) |
+| `toulon_assault` | *Assault on Toulon by the Republican troops, 19 Dec 1793 (engraving)* | Anonymous | 1793 | Toulon build (CC0) |
+| `napoleon_arcole` | *Bonaparte at the Pont d'Arcole* | Antoine-Jean Gros | 1796 | Italy opening + freeze frame, memory |
+| `napoleon_alps_david` | *Bonaparte Crossing the Great St Bernard* | Jacques-Louis David | 1801–02 | Marengo, memory |
+| `marengo_lejeune` | *The Battle of Marengo* | Louis-François Lejeune | 1801 | Marengo montage |
+| `brumaire_bouchot` | *Bonaparte at the Council of Five Hundred (18 Brumaire)* | François Bouchot | 1840 | 18 Brumaire |
+| `nile_orient` | *The Destruction of L'Orient at the Battle of the Nile* | George Arnald | 1825–27 | Nile |
+| `trafalgar_turner` | *The Battle of Trafalgar* | J. M. W. Turner | 1822–24 | Trafalgar |
+| `coronation_david` | *The Coronation of Napoleon* | Jacques-Louis David | 1805–07 | Coronation, memory |
+| `napoleon_throne_ingres` | *Napoleon I on his Imperial Throne* | J.-A.-D. Ingres | 1806 | Emperor (cut out) |
+| `napoleon_study_david` | *The Emperor Napoleon in His Study at the Tuileries* | Jacques-Louis David | 1812 | Civil Code machinery (cut out) |
+| `napoleon_austerlitz` | *The Battle of Austerlitz* | François Gérard | 1810 | Austerlitz hit, overload, memory |
+| `jena_vernet` | *Napoleon at the Battle of Jena* | Horace Vernet | 1836 | Jena, memory; Wagram fallback |
+| `third_of_may_goya` | *The Third of May 1808* | Francisco Goya | 1814 | Madrid |
+| `wellington_lawrence` | *Arthur Wellesley, 1st Duke of Wellington* | Thomas Lawrence | 1815–16 | Spain, Waterloo |
+| `marie_louise` | *Empress Marie-Louise* | François Gérard | 1810 | Dynasty |
+| `moscow_fire` | *Napoleon in Burning Moscow* | Albrecht Adam | 1841 | Moscow, memory |
+| `berezina_hess` | *The Crossing of the Berezina* | Peter von Hess | 1844 | Retreat; Eylau fallback |
+| `leipzig_sauerweid` | *The Battle of Leipzig* | Alexander Sauerweid | c. 1815 | Leipzig; Borodino fallback |
+| `fontainebleau_delaroche` | *Napoleon at Fontainebleau, 31 March 1814* | Paul Delaroche | 1845 | Abdication (cut out; low-res source) |
+| `fontainebleau_adieux` | *Napoleon's Farewell to the Imperial Guard* | Horace Vernet | 1825 | Adieux / eagle falls |
+| `napoleon_elba` | *The Return from Elba* | Charles de Steuben | 1818 | Grenoble (low-res source) |
+| `napoleon_waterloo` | *The Battle of Waterloo, 18 June 1815* | Clément-Auguste Andrieux | 1852 | Waterloo title |
+| `scotland_forever` | *Scotland Forever!* | Elizabeth Thompson, Lady Butler | 1881 | Waterloo cavalry |
+| `death_napoleon` | *The Death of Napoleon, 5 May 1821* | Charles de Steuben | 1828 | Saint Helena |
 
-All of these are available on **Wikimedia Commons** (search the title). Gallica (BnF) and the Paris Musées open-access collections are good alternatives. When you add an image, update its `focus` in `src/data/assets.ts` to the normalized point where Napoleon's face is, so the composition-aware framing puts him in the right third.
+### Still missing (the edit shows a fallback in their place)
+- `nelson_abbott.jpg`: Abbott, *Nelson* (fallback: the Nile painting)
+- `murat_gros.jpg`: Gros, *Murat* (fallback: Jena)
+- `wagram_vernet.jpg`: Vernet, *Wagram* (fallback: a re-graded Jena)
+- `eylau_gros.jpg`: Gros, *Eylau* (fallback: a re-graded Berezina)
+- `borodino_lejeune.jpg`: Lejeune, *Borodino* (fallback: a re-graded Leipzig)
 
 ## 3. Procedural art (generated in code)
 - **Maps**: Natural Earth 1:50m land (`world-atlas`, public domain) with a single conic projection. Rivers, routes, the approximate French Empire c. 1811, and dependent-state glows are hand-written in `src/data/campaigns.ts`.

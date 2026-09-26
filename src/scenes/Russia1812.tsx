@@ -183,6 +183,14 @@ const Moscow: React.FC<{l: number}> = ({l}) => {
         {/* tiny Napoleon, still */}
         <Figure id="harangue_nap_sil" x={540} y={1500} h={190} anchor="bottom" />
       </Cam>
+      {/* Albrecht Adam: Napoleon before the burning city — the only slow push in the whole act */}
+      {l >= 56 ? (
+        <Fill style={{opacity: clamp((l - 56) / 24)}}>
+          <HistoricalImage id="moscow_fire" zoom={kf(l, [[56, 1.0], [150, 1.18]])} place={{x: 0.5, y: 0.5}} filter="contrast(1.1) saturate(1.15)" />
+          <ParticleField kind="embers" density={60} speed={0.7} seed={142} size={1.1} />
+          <Fill style={{background: 'linear-gradient(180deg, rgba(18,3,2,0.7) 0%, transparent 30%, transparent 75%, rgba(18,3,2,0.85) 100%)'}} />
+        </Fill>
+      ) : null}
       <TypographyImpact text="MOSCOW" at={10} mode="track" font="imperial" size={96} y={360} color="#ffd9c8" tracking={0.35} />
       <TypographyImpact text="14 SEPTEMBER 1812" at={20} mode="track" font="archive" size={34} y={450} color="#ff9a6a" tracking={0.3} weight={600} />
       <Caption text="the city is almost empty — then it burns" at={50} y={1640} color="#ffd9c8" size={32} />
@@ -241,6 +249,17 @@ const Retreat: React.FC<{l: number}> = ({l}) => {
           <NameMotif from={POWER.y1812a} to={POWER.y1812b} at={20} dur={180} text="NAPOLEON" y={1100} color="rgba(29,36,43,0.55)" tracking={0.02} />
         </Fill>
       )}
+      {/* Hess: the Berezina crossing, drained of colour, buried in snow */}
+      <Seg from={138} dur={44}>
+        {(k) => (
+          <Fill>
+            <HistoricalImage id="berezina_hess" zoom={1.3 + k * 0.004} place={{x: 0.5 - k * 0.002, y: 0.55}} filter="grayscale(0.75) contrast(1.15) brightness(1.1)" />
+            <ParticleField kind="snow" density={320} speed={3} wind={16} seed={139} size={1.5} />
+            <TypographyImpact text="BEREZINA" at={4} mode="slam" font="grotesk" size={220} y={360} color="#1d242b" />
+            <TypographyImpact text="26–29 NOVEMBER 1812" at={8} mode="track" font="archive" size={36} y={500} color="#1d242b" tracking={0.3} weight={600} />
+          </Fill>
+        )}
+      </Seg>
       {/* damaged memories */}
       {memories.map((m) => (
         <Seg key={m.kind} from={m.at} dur={10}>

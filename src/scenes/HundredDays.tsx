@@ -89,6 +89,14 @@ const RouteNorth: React.FC<{l: number}> = ({l}) => {
         <AnimatedArrow route={route('vol1815')} progress={progress} color="#e3b955" width={18} head={64} glow />
       </AnimatedMap>
       <Fill style={{background: `rgba(11,42,120,${0.2 + energy * 0.2})`, mixBlendMode: 'multiply'}} />
+      {/* Steuben: the troops sent to stop him go over to him (Laffrey, near Grenoble, 7 March) */}
+      {l >= 60 && l < 86 ? (
+        <Fill>
+          <HistoricalImage id="napoleon_elba" zoom={1.35 + (l - 60) * 0.008} place={{x: 0.5, y: 0.45}} filter="contrast(1.15) saturate(1.3)" />
+          <Fill style={{background: 'linear-gradient(0deg, rgba(5,10,28,0.9) 10%, transparent 45%)'}} />
+          <Caption text="the troops sent to stop him join him instead" at={62} y={1720} color="#f3e2a6" size={32} />
+        </Fill>
+      ) : null}
       {/* royal symbols flee */}
       <div style={{position: 'absolute', left: kf(l, [[20, 620], [130, 1500, inExpo]]), top: 240, transform: `rotate(${kf(l, [[20, 0], [130, 30]])}deg)`, opacity: kf(l, [[20, 1], [130, 0]])}}>
         <Flag kind="bourbon" width={380} frame={l} />
