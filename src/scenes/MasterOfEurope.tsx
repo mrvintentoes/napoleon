@@ -125,6 +125,12 @@ const Eylau: React.FC<{l: number}> = ({l}) => {
         <Fill style={{background: '#8b0000', opacity: red * 0.75, mixBlendMode: 'multiply'}} />
         <TypographyImpact text="EYLAU" mode="slam" font="grotesk" size={320} y={380} color="#39424c" stroke={red > 0.3 ? '#b30000' : undefined} strokeW={5} />
         <TypographyImpact text="7–8 FEBRUARY 1807" at={4} mode="track" font="archive" size={40} y={540} color="#1d242b" tracking={0.3} weight={600} />
+        {l >= 24 && l < 46 ? (
+          <Fill>
+            <HistoricalImage id="murat_gros" zoom={1.3 + (l - 24) * 0.01} place={{x: 0.5, y: 0.35}} filter="grayscale(0.5) contrast(1.2)" />
+            <ParticleField kind="snow" density={220} speed={3.5} wind={14} seed={81} size={1.4} />
+          </Fill>
+        ) : null}
         <TypographyImpact text="MURAT" at={24} out={70} mode="slam" font="grotesk" size={180} y={1550} color="#fff" shadow="0 0 30px #000" />
         <Caption text="leads a massed cavalry charge through the snowstorm" at={30} out={70} y={1660} color="#fff" size={30} />
         <TypographyImpact text="A BLOODY STALEMATE" at={70} mode="cut" font="cond" size={80} y={1560} color="#b30000" tracking={0.08} />

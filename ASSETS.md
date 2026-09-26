@@ -50,12 +50,13 @@ Each one is saved in `assets_src/commons/` and imported to `public/images/<slot>
 | `scotland_forever` | *Scotland Forever!* | Elizabeth Thompson, Lady Butler | 1881 | Waterloo cavalry |
 | `death_napoleon` | *The Death of Napoleon, 5 May 1821* | Charles de Steuben | 1828 | Saint Helena |
 
+| `nelson_abbott` | *Rear-Admiral Sir Horatio Nelson* | Lemuel Francis Abbott | c. 1799 | Nile |
+| `murat_gros` | *Equestrian portrait of Joachim Murat* | Antoine-Jean Gros | c. 1812 | Eylau (Murat's charge) |
+| `wagram_vernet` | *The Battle of Wagram* | Horace Vernet | 1836 | Wagram, memory |
+
 ### Still missing (the edit shows a fallback in their place)
-- `nelson_abbott.jpg`: Abbott, *Nelson* (fallback: the Nile painting)
-- `murat_gros.jpg`: Gros, *Murat* (fallback: Jena)
-- `wagram_vernet.jpg`: Vernet, *Wagram* (fallback: a re-graded Jena)
-- `eylau_gros.jpg`: Gros, *Eylau* (fallback: a re-graded Berezina)
-- `borodino_lejeune.jpg`: Lejeune, *Borodino* (fallback: a re-graded Leipzig)
+- `eylau_gros.jpg`: Gros, *Napoleon on the Battlefield of Eylau* (fallback: a re-graded Berezina)
+- `borodino_lejeune.jpg`: Lejeune, *Battle of Borodino* (fallback: a re-graded Leipzig)
 
 ## 3. Procedural art (generated in code)
 - **Maps**: Natural Earth 1:50m land (`world-atlas`, public domain) with a single conic projection. Rivers, routes, the approximate French Empire c. 1811, and dependent-state glows are hand-written in `src/data/campaigns.ts`.

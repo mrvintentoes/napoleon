@@ -356,5 +356,17 @@
  "images/cut/napoleon_toulon_sil.png": {
   "w": 1749,
   "h": 2253
+ },
+ "images/murat_gros.jpg": {
+  "w": 1618,
+  "h": 2000
+ },
+ "images/nelson_abbott.jpg": {
+  "w": 1659,
+  "h": 2000
+ },
+ "images/wagram_vernet.jpg": {
+  "w": 2000,
+  "h": 1475
  }
 }

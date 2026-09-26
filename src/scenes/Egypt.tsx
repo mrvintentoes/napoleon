@@ -180,7 +180,13 @@ const Nile: React.FC<{l: number}> = ({l}) => {
             <ParticleField kind="embers" density={140} speed={2.2} seed={9} opacity={burn} size={1.5} />
             <Fill style={{background: 'linear-gradient(180deg, rgba(5,11,20,0.75) 0%, transparent 40%, transparent 70%, rgba(5,11,20,0.8) 100%)'}} />
             <Smoke count={7} seed={40} opacity={0.5 * burn} y={1100} speed={4} tint="brightness(0.25)" />
-            <TypographyImpact text="NELSON" at={0} out={24} outMode="cut" mode="slam" font="grotesk" size={330} y={560} color="#c8102e" chroma={10} />
+            {l < 24 ? (
+              <Fill>
+                <HistoricalImage id="nelson_abbott" zoom={1.25 + l * 0.01} place={{x: 0.5, y: 0.42}} filter="contrast(1.2) saturate(1.1)" />
+                <Fill style={{background: 'linear-gradient(180deg, rgba(5,11,20,0.85) 0%, transparent 45%)'}} />
+              </Fill>
+            ) : null}
+            <TypographyImpact text="NELSON" at={0} out={24} outMode="cut" mode="slam" font="grotesk" size={330} y={300} color="#c8102e" chroma={10} />
             <TypographyImpact text="ABOUKIR BAY" at={26} out={50} outMode="cut" mode="stretch" font="grotesk" size={170} y={520} color="#e9f2ff" />
             <TypographyImpact text="1–3 AUGUST 1798" at={28} out={50} outMode="cut" mode="track" font="archive" size={40} y={640} color="#ff8a5a" tracking={0.3} weight={600} />
             <TypographyImpact text="THE NILE" at={52} mode="slam" font="grotesk" size={300} y={500} color="#ffb070" chroma={8} />
