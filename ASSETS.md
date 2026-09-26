@@ -67,5 +67,6 @@ Each one is saved in `assets_src/commons/` and imported to `public/images/<slot>
 Cinzel, Anton, Oswald, EB Garamond, Playfair Display — in `public/fonts/`.
 
 ## 5. Audio
+- `public/audio/main-track-orchestral.mp3` is the **orchestral score**, arranged in code (`scripts/make_score.py`) from real recorded instruments in **VSCO 2 Community Edition** (Versilian Studios, CC0 1.0 — https://github.com/sgossner/VSCO-2-CE). The Upright Piano was sampled by Simon Dalzell (Ivy Audio) and is redistributed under the same terms. Credit is encouraged but not required. The score is cued to the edit's marker times. Rebuild it with `VSCO=/path/to/VSCO-2-CE npm run audio:score`.
 - `public/audio/main-track.mp3` is a **temporary synthesized score** built by `scripts/make_audio.py`. It is locked to the 120 BPM grid and the markers, and has no third-party content.
 - `public/sfx/*.wav` are synthesized one-shots and beds: cannon, boom_low, distant_cannon, impact, whoosh, riser, saber, paper, wind, ocean, fire, gallop, marching, crowd, glitch, heartbeat.

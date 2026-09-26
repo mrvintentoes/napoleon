@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "render": "npm run scan && remotion render src/index.ts NapoleonEdit out/napoleon_edit.mp4 --codec=h264 --crf=20 --x264-preset=slow --audio-bitrate=320k",
     "render:tests": "bash scripts/render_tests.sh",
-    "stills": "node scripts/stills.mjs NapoleonEdit 0.3"
+    "stills": "node scripts/stills.mjs NapoleonEdit 0.3",
+    "audio:score": "python3 scripts/make_score.py && ffmpeg -y -loglevel error -i public/audio/main-track.wav -b:a 256k public/audio/main-track.mp3 && rm public/audio/main-track.wav && node scripts/scan-assets.mjs"
   },
   "dependencies": {
     "@fontsource/anton": "^5.3.0",

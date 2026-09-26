@@ -3,3 +3,4 @@ out/
 *.log
 .DS_Store
 assets_src/*_cut_raw.png
+assets_src/score-master.wav
