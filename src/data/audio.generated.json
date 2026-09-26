@@ -3,6 +3,7 @@
  "audio/main-track-machine.mp3": true,
  "audio/main-track-orchestral.mp3": true,
  "audio/main-track-sovereign.mp3": true,
+ "audio/main-track-synth-placeholder.mp3": true,
  "audio/main-track.mp3": true,
  "sfx/boom_low.wav": true,
  "sfx/cannon.wav": true,
