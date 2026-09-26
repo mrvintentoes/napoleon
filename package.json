@@ -1,0 +1,43 @@
+{
+  "name": "napoleon-edit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Napoleon Bonaparte 1769–1821 — vertical cinematic history edit built with Remotion",
+  "scripts": {
+    "scan": "node scripts/scan-assets.mjs",
+    "prepare-assets": "python3 scripts/prepare_assets.py && node scripts/scan-assets.mjs",
+    "audio": "python3 scripts/make_audio.py && npx remotion ffmpeg -y -loglevel error -i public/audio/main-track.wav -b:a 256k public/audio/main-track.mp3 && rm public/audio/main-track.wav && node scripts/scan-assets.mjs",
+    "dev": "npm run scan && remotion studio src/index.ts",
+    "preview": "npm run dev",
+    "typecheck": "tsc --noEmit",
+    "render": "npm run scan && remotion render src/index.ts NapoleonEdit out/napoleon_edit.mp4 --codec=h264 --crf=20 --x264-preset=slow --audio-bitrate=320k",
+    "render:tests": "bash scripts/render_tests.sh",
+    "stills": "node scripts/stills.mjs NapoleonEdit 0.3"
+  },
+  "dependencies": {
+    "@fontsource/anton": "^5.3.0",
+    "@fontsource/cinzel": "^5.3.0",
+    "@fontsource/eb-garamond": "^5.3.0",
+    "@fontsource/oswald": "^5.3.0",
+    "@fontsource/playfair-display": "^5.3.0",
+    "@remotion/cli": "^4.0.529",
+    "@remotion/fonts": "^4.0.529",
+    "@remotion/media-utils": "^4.0.529",
+    "d3-geo": "^3.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.529",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "^4.0.529",
+    "@remotion/renderer": "^4.0.529",
+    "@types/d3-geo": "^3.1.1",
+    "@types/react": "^18.3.31",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
+    "image-size": "^1.2.1",
+    "typescript": "^7.0.2"
+  }
+}

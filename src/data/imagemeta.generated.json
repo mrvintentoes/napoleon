@@ -1,0 +1,176 @@
+{
+ "images/gros_first_consul.jpg": {
+  "w": 1619,
+  "h": 2057
+ },
+ "images/gros_first_consul_fried.jpg": {
+  "w": 1619,
+  "h": 2057
+ },
+ "images/gros_first_consul_halftone.jpg": {
+  "w": 809,
+  "h": 1028
+ },
+ "images/gros_pyramids_harangue.jpg": {
+  "w": 1688,
+  "h": 2268
+ },
+ "images/gros_pyramids_harangue_fried.jpg": {
+  "w": 1688,
+  "h": 2268
+ },
+ "images/gros_pyramids_harangue_halftone.jpg": {
+  "w": 844,
+  "h": 1134
+ },
+ "images/map_europe_1812_ru.jpg": {
+  "w": 1920,
+  "h": 1132
+ },
+ "images/watteau_battle_pyramids.jpg": {
+  "w": 2250,
+  "h": 1742
+ },
+ "images/watteau_battle_pyramids_fried.jpg": {
+  "w": 2250,
+  "h": 1742
+ },
+ "images/cut/gros_first_consul_fg.png": {
+  "w": 1619,
+  "h": 2057,
+  "bbox": [
+   71,
+   44,
+   1619,
+   2001
+  ]
+ },
+ "images/cut/gros_first_consul_plate.jpg": {
+  "w": 1619,
+  "h": 2057
+ },
+ "images/cut/gros_first_consul_rider_fg.png": {
+  "w": 1619,
+  "h": 2057,
+  "bbox": [
+   71,
+   379,
+   1015,
+   1906
+  ]
+ },
+ "images/cut/gros_first_consul_rider_sil.png": {
+  "w": 1619,
+  "h": 2057,
+  "bbox": [
+   71,
+   379,
+   1015,
+   1906
+  ]
+ },
+ "images/cut/gros_first_consul_rider_sil_white.png": {
+  "w": 1619,
+  "h": 2057,
+  "bbox": [
+   71,
+   379,
+   1015,
+   1906
+  ]
+ },
+ "images/cut/gros_first_consul_sil.png": {
+  "w": 1619,
+  "h": 2057,
+  "bbox": [
+   71,
+   44,
+   1619,
+   2001
+  ]
+ },
+ "images/cut/gros_first_consul_sil_white.png": {
+  "w": 1619,
+  "h": 2057,
+  "bbox": [
+   71,
+   44,
+   1619,
+   2001
+  ]
+ },
+ "images/cut/gros_pyramids_harangue_fg.png": {
+  "w": 1688,
+  "h": 2268,
+  "bbox": [
+   0,
+   195,
+   1258,
+   2096
+  ]
+ },
+ "images/cut/gros_pyramids_harangue_napoleon_fg.png": {
+  "w": 1688,
+  "h": 2268,
+  "bbox": [
+   431,
+   195,
+   1258,
+   2096
+  ]
+ },
+ "images/cut/gros_pyramids_harangue_napoleon_sil.png": {
+  "w": 1688,
+  "h": 2268,
+  "bbox": [
+   431,
+   195,
+   1258,
+   2096
+  ]
+ },
+ "images/cut/gros_pyramids_harangue_napoleon_sil_white.png": {
+  "w": 1688,
+  "h": 2268,
+  "bbox": [
+   431,
+   195,
+   1258,
+   2096
+  ]
+ },
+ "images/cut/gros_pyramids_harangue_plate.jpg": {
+  "w": 1688,
+  "h": 2268
+ },
+ "images/cut/gros_pyramids_harangue_sil.png": {
+  "w": 1688,
+  "h": 2268,
+  "bbox": [
+   0,
+   195,
+   1258,
+   2096
+  ]
+ },
+ "images/cut/gros_pyramids_harangue_sil_white.png": {
+  "w": 1688,
+  "h": 2268,
+  "bbox": [
+   0,
+   195,
+   1258,
+   2096
+  ]
+ },
+ "images/cut/watteau_flag_fg.png": {
+  "w": 370,
+  "h": 806,
+  "bbox": [
+   3,
+   19,
+   367,
+   800
+  ]
+ }
+}
