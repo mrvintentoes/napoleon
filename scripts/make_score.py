@@ -116,7 +116,7 @@ class Inst:
         return y
 
 
-BUS = {k: np.zeros((N, 2), np.float32) for k in ('str', 'brass', 'perc', 'keys')}
+BUS = {k: np.zeros((N, 2), np.float32) for k in ('str', 'brass', 'perc', 'keys', 'sub')}
 
 
 def play(inst, bus, beat, midi, vel=0.7, beats=1.0, secs=None):
@@ -137,6 +137,20 @@ def chord(inst, bus, beat, notes, vel=0.7, beats=4.0):
 def hit(inst, bus, beat, vel=0.9, note=None):
     s = inst.samples[0][0] if note is None else note
     play(inst, bus, beat, s, vel, secs=4.0)
+
+
+def sub(beat, midi, secs=1.0, vel=0.8, drop=False):
+    """sine sub-bass with a pitch drop and saturation — weight under the hits"""
+    n = int((secs + 0.3) * SR)
+    t = np.arange(n) / SR
+    f = 440 * 2 ** ((midi - 69) / 12)
+    f = f * (1 + (1.5 if drop else 0.4) * np.exp(-t * 18))
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * (1.2 / secs)) * np.minimum(1, t / 0.003)
+    x = np.tanh(x * 2.2) * vel * 0.55
+    i = int(T(beat) * SR)
+    j = min(N, i + n)
+    if i < N:
+        BUS['sub'][i:j] += np.stack([x, x], 1)[: j - i].astype(np.float32)
 
 
 # ---------------------------------------------------------------- instruments
@@ -224,7 +238,7 @@ Bm = [47, 50, 54]
 Eb = [51, 55, 58]
 MIN = [Dm, Bb, F_, C_]
 MIN2 = [Dm, Gm, Bb, A_]
-MAJ = [DM, A_, Bm, G_]
+MAJ = [Dm, Bb, C_, A_]  # darker: the 'triumph' sections stay in minor (aeolian with a major V)
 DARK = [Dm, Eb, Bb, A_]
 
 
@@ -287,23 +301,31 @@ def brass_chords(b0, b1, prog, vel=0.75, rhythm=(0,), length=1.8, big=True):
             if bb >= b1:
                 continue
             for n in ch:
-                play(hn, 'brass', bb, n + 12, vel, length)
-            play(tbn, 'brass', bb, ch[0], vel, length)
-            play(tbn, 'brass', bb, ch[2], vel, length)
-            play(tba, 'brass', bb, ch[0] - 12, vel, length)
+                play(hn, 'brass', bb, n, vel, length)
+            play(tbn, 'brass', bb, ch[0] - 12, vel, length)
+            play(tbn, 'brass', bb, ch[2] - 12, vel, length)
+            play(tba, 'brass', bb, ch[0] - 24, vel, length)
             if big:
-                play(tpt, 'brass', bb, ch[2] + 12, vel * 0.9, length)
+                play(tpt, 'brass', bb, ch[2], vel * 0.7, length)
         b += 4
 
 
-def stabs(beats, ch, vel=0.95):
+def stabs(beats, ch, vel=0.95, braam=False):
     for bb in beats:
         for n in ch:
-            play(hn_st, 'brass', bb, n + 12, vel, 0.5)
-            play(tpt_st, 'brass', bb, n + 12, vel * 0.85, 0.5)
-        play(tbn_st, 'brass', bb, ch[0], vel, 0.5)
-        play(tba_st, 'brass', bb, ch[0] - 12, vel, 0.5)
-        play(tba_st, 'brass', bb, ch[0] - 24, vel, 0.5)
+            play(hn_st, 'brass', bb, n, vel, 0.5)
+            play(tbn_st, 'brass', bb, n - 12, vel, 0.5)
+        play(tpt_st, 'brass', bb, ch[2], vel * 0.6, 0.5)
+        play(tba_st, 'brass', bb, ch[0] - 12, vel, 0.6)
+        play(tba_st, 'brass', bb, ch[0] - 24, vel, 0.6)
+        sub(bb, ch[0] - 24, 0.9, vel)
+        if braam:
+            # low sustained cluster (root + minor second + fifth), trailer-style
+            for n in (ch[0] - 12, ch[0] - 11, ch[0] - 5):
+                play(tbn, 'brass', bb, n, vel, 2.5)
+            play(tba, 'brass', bb, ch[0] - 24, vel, 2.5)
+            play(hn, 'brass', bb, ch[0], vel, 2.5)
+            play(hn, 'brass', bb, ch[0] + 1, vel * 0.8, 2.5)
 
 
 def drums(b0, b1, vel=0.8, style='drive'):
@@ -333,6 +355,7 @@ def drums(b0, b1, vel=0.8, style='drive'):
                 bd.at('perc', b, vel)
             if pos in (2, 6):
                 snare.at('perc', b, vel)
+                anvil.at('perc', b, vel * 0.55)
             tenor.at('perc', b, vel * 0.45)
             if pos in (0, 4):
                 timp_low.at('perc', b, vel * 0.7)
@@ -349,7 +372,8 @@ def big_hit(b, vel=1.0, gong_too=True, ch=Dm):
     crash.at('perc', b, vel)
     if gong_too:
         gong.at('perc', b, vel)
-    stabs([b], ch, vel)
+    stabs([b], ch, vel, braam=True)
+    sub(b, ch[0] - 24, 3.0, vel, drop=True)
 
 
 def roll_into(b0, b1, vel=0.9):
@@ -446,15 +470,15 @@ gong.at('perc', 84, 1.0)
 bd.at('perc', 84, 1.0)
 timp_low.at('perc', 84, 1.0)
 crash.at('perc', 84, 1.0)
-for n in (50, 54, 57, 62, 66, 69):
+for n in (38, 50, 53, 57, 62, 65):
     play(organ, 'keys', 84, n, 0.9, 8)
 play(organ, 'keys', 92, 45, 0.8, 2)
 play(organ, 'keys', 92, 57, 0.8, 2)
 play(organ, 'keys', 92, 61, 0.8, 2)
-fanfare = [(62, 0.5), (62, 0.5), (69, 1), (69, 0.5), (74, 1.5), (73, 0.5), (71, 0.5), (69, 1), (66, 1), (69, 2)]
+fanfare = [(62, 0.5), (62, 0.5), (69, 1), (69, 0.5), (74, 1.5), (73, 0.5), (70, 0.5), (69, 1), (65, 1), (69, 2)]
 melody(tpt, 'brass', 86, fanfare, 0.9)
 melody(hn, 'brass', 86, [(n - 12, L) for n, L in fanfare], 0.8)
-pads(84, 94, [DM, DM, G_, A_], 0.6)
+pads(84, 94, [Dm, Dm, Gm, A_], 0.6)
 for b in (86, 88, 90, 92, 93):
     timp_low.at('perc', b, 0.8)
 # AUSTERLITZ 94-98: coalition hits
@@ -471,16 +495,16 @@ play(vln, 'str', 99, 69, 0.3, 3)
 play(vln, 'str', 100, 74, 0.4, 2)
 roll_into(100, 102, 1.0)
 # AUSTERLITZ_DROP 102-116: everything, D major
-big_hit(102, 1.0, ch=DM)
+big_hit(102, 1.0, ch=Dm)
 drums(102, 116, 0.95, 'drive')
 ostinato(102, 116, MAJ, 0.8, div=4)
 bassline(102, 116, MAJ, 0.9)
 pads(102, 116, MAJ, 0.55, sections=(vln, vla))
 brass_chords(102, 116, MAJ, 0.7, rhythm=(0, 1.5, 3), length=1.2)
-themeM = [(n + (4 if n in (65, 77) else 0) if n else None, L) for n, L in theme]  # major-mode variant
+themeM = theme  # darker: triumphant sections keep the minor theme
 melody(hn, 'brass', 104, themeM, 0.9)
-melody(tpt, 'brass', 104, [(n + 12 if n else None, L) for n, L in themeM], 0.8)
-for n in (50, 54, 57, 62):
+melody(tbn, 'brass', 104, [(n - 12 if n else None, L) for n, L in themeM], 0.85)
+for n in (38, 50, 53, 57):
     play(organ, 'keys', 102, n, 0.7, 4)
 # MASTER 116-132: aggressive minor drive, then the build to the peak
 big_hit(116, 0.9, gong_too=False)
@@ -495,7 +519,7 @@ roll_into(128, 132, 1.0)
 for b, n in [(128, 57), (129, 60), (130, 62), (131, 66)]:
     chord(hn, 'brass', b, [n, n + 7], 0.8, 1)
 # PEAK 132-140: the apex, D major, organ + full brass
-big_hit(132, 1.0, ch=DM)
+big_hit(132, 1.0, ch=Dm)
 drums(132, 140, 1.0, 'drive')
 ostinato(132, 140, MAJ, 0.85, div=4)
 bassline(132, 140, MAJ, 0.95)
@@ -503,7 +527,8 @@ brass_chords(132, 140, MAJ, 0.85, rhythm=(0, 2), length=1.9)
 for bar, ch in enumerate(MAJ * 2):
     for n in up(ch, 1):
         play(organ, 'keys', 132 + bar * 4 if bar < 2 else 132 + bar * 4, n, 0.6, 4) if bar < 2 else None
-melody(tpt, 'brass', 132, [(n + 12 if n else None, L) for n, L in themeM[:10]], 0.9)
+melody(hn, 'brass', 132, themeM[:10], 0.95)
+melody(tbn, 'brass', 132, [(n - 12 if n else None, L) for n, L in themeM[:10]], 0.9)
 crash.at('perc', 136, 0.9)
 # SPAIN 140-152: burnt, heavy minor
 big_hit(140, 0.9, gong_too=False, ch=Dm)
@@ -582,14 +607,14 @@ roll_into(232, 234, 1.0)
 play(hn, 'brass', 231, 62, 0.75, 3)
 play(hn, 'brass', 231, 69, 0.75, 3)
 # PARIS 1815 234-242: full energy restored (Austerlitz reprise)
-big_hit(234, 1.0, ch=DM)
+big_hit(234, 1.0, ch=Dm)
 drums(234, 242, 1.0, 'drive')
 ostinato(234, 242, MAJ, 0.85, div=4)
 bassline(234, 242, MAJ, 0.95)
 brass_chords(234, 242, MAJ, 0.8, rhythm=(0, 1.5, 3), length=1.2)
 melody(hn, 'brass', 234, themeM[:10], 0.9)
-melody(tpt, 'brass', 234, [(n + 12 if n else None, L) for n, L in themeM[:10]], 0.85)
-for n in (50, 54, 57, 62):
+melody(tbn, 'brass', 234, [(n - 12 if n else None, L) for n, L in themeM[:10]], 0.85)
+for n in (38, 50, 53, 57):
     play(organ, 'keys', 234, n, 0.7, 4)
 # WATERLOO 242-248: tension
 for b in range(242, 248):
@@ -612,10 +637,15 @@ ostinato(256, 262, MIN, 0.9, div=4)
 bassline(256, 262, MIN, 1.0)
 pads(256, 262, MIN, 0.65)
 melody(hn, 'brass', 256, theme[:9], 1.0)
-melody(tpt, 'brass', 256, [(n + 12 if n else None, L) for n, L in theme[:9]], 0.9)
+melody(tbn, 'brass', 256, [(n - 12 if n else None, L) for n, L in theme[:9]], 0.95)
 for n in (50, 53, 57, 62):
     play(organ, 'keys', 256, n, 0.8, 6)
 roll_into(260, 262, 1.0)
+# low drones (cellos + basses an octave down) under the dark sections
+for b0, b1 in [(59, 66), (160, 170), (177, 192), (242, 248)]:
+    play(cb, 'str', b0, 26, 0.6, b1 - b0)
+    play(vc, 'str', b0, 38, 0.45, b1 - b0)
+    play(vc, 'str', b0, 39, 0.3, b1 - b0)  # minor-second rub
 # FINAL_CUT 262: absolute silence (distant cannon lives in SFX)
 # SAINT HELENA 266-286: piano alone, strings like mist
 elegy = [(74, 2), (69, 1), (70, 1), (69, 2), (65, 2), (67, 1), (65, 1), (64, 2), (62, 4)]
@@ -642,9 +672,26 @@ def verb(x, ir, wet):
     return x + y * wet
 
 
-hall = reverb_ir(3.2, 2.2)
-mix = (verb(BUS['str'], hall, 0.35) * 1.0 + verb(BUS['brass'], hall, 0.3) * 0.9 + verb(BUS['perc'], hall, 0.18) * 0.95
-       + verb(BUS['keys'], hall, 0.35) * 0.9)
+hall = reverb_ir(4.2, 1.6)
+
+
+def drive(x, amount):
+    """tape-style saturation: harmonics + grit, level-compensated"""
+    pk = np.percentile(np.abs(x), 99.5) + 1e-9
+    return np.tanh(x / pk * amount) * pk / np.tanh(amount)
+
+
+def lowpass(x, f, order=2):
+    return sosfilt(butter(order, f / (SR / 2), 'low', output='sos'), x, axis=0)
+
+
+brass = drive(BUS['brass'], 2.2)
+perc = drive(BUS['perc'], 1.8)
+strings = drive(BUS['str'], 1.3)
+mix = (verb(strings, hall, 0.4) * 1.0 + verb(brass, hall, 0.34) * 0.95 + verb(perc, hall, 0.2) * 1.0
+       + verb(BUS['keys'], hall, 0.38) * 0.9 + BUS['sub'] * 1.1)
+# darker tone: roll off the top, thicken the low-mids
+mix = lowpass(mix, 7500) * 0.8 + lowpass(mix, 400) * 0.45
 
 # section dynamics: Russia cold (low-pass), Nile muffled
 def lowpass_region(x, b0, b1, f):
